@@ -1,0 +1,97 @@
+{
+  "as_of_last_purchase": "2011-12-09",
+  "segments": [
+    {
+      "segment": "Champions",
+      "customers": 1369,
+      "avg_recency_days": 19.0,
+      "avg_orders": 19.8,
+      "avg_net_revenue": 8302.0,
+      "total_net_revenue": 11364837.0,
+      "pct_revenue": 69.5
+    },
+    {
+      "segment": "Loyal",
+      "customers": 1262,
+      "avg_recency_days": 74.0,
+      "avg_orders": 6.4,
+      "avg_net_revenue": 1989.0,
+      "total_net_revenue": 2510259.0,
+      "pct_revenue": 15.3
+    },
+    {
+      "segment": "At Risk",
+      "customers": 742,
+      "avg_recency_days": 340.0,
+      "avg_orders": 5.8,
+      "avg_net_revenue": 1604.0,
+      "total_net_revenue": 1189844.0,
+      "pct_revenue": 7.3
+    },
+    {
+      "segment": "Lost",
+      "customers": 876,
+      "avg_recency_days": 553.0,
+      "avg_orders": 1.3,
+      "avg_net_revenue": 380.0,
+      "total_net_revenue": 333146.0,
+      "pct_revenue": 2.0
+    },
+    {
+      "segment": "Cannot Lose Them",
+      "customers": 125,
+      "avg_recency_days": 492.0,
+      "avg_orders": 7.8,
+      "avg_net_revenue": 2210.0,
+      "total_net_revenue": 276297.0,
+      "pct_revenue": 1.7
+    },
+    {
+      "segment": "New / Promising",
+      "customers": 496,
+      "avg_recency_days": 26.0,
+      "avg_orders": 1.7,
+      "avg_net_revenue": 550.0,
+      "total_net_revenue": 272593.0,
+      "pct_revenue": 1.7
+    },
+    {
+      "segment": "Hibernating",
+      "customers": 589,
+      "avg_recency_days": 314.0,
+      "avg_orders": 1.4,
+      "avg_net_revenue": 391.0,
+      "total_net_revenue": 230253.0,
+      "pct_revenue": 1.4
+    },
+    {
+      "segment": "Potential Loyalist",
+      "customers": 373,
+      "avg_recency_days": 105.0,
+      "avg_orders": 1.4,
+      "avg_net_revenue": 493.0,
+      "total_net_revenue": 183790.0,
+      "pct_revenue": 1.1
+    }
+  ],
+  "totals": {
+    "known_customers": 5942.0,
+    "purchasing_customers": 5832.0,
+    "net_product_revenue": 18925714.0,
+    "attributable_revenue": 16358063.0,
+    "guest_revenue": 2567652.0
+  },
+  "repeat": {
+    "buyers": 5876.0,
+    "repeat_buyers": 4444.0,
+    "repeat_rate_pct": 75.6
+  },
+  "top20pct_revenue_share": 76.7,
+  "winback_target": {
+    "customers": 867.0,
+    "avg_net_revenue": 1691.0,
+    "total_hist_revenue": 1466141.0,
+    "avg_recency_days": 362.0,
+    "avg_orders": 6.1
+  }
+}

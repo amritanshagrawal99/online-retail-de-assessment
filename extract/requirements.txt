@@ -1,0 +1,10 @@
+# Extract & load dependencies (Python 3.10+)
+pandas>=2.0
+openpyxl>=3.1          # read the .xlsx workbook
+pyarrow>=14.0          # write the parquet RAW artifact
+requests>=2.31         # download the UCI zip
+
+# Only needed if you actually push to BigQuery (python extract/load.py --project ...)
+google-cloud-bigquery>=3.20
+google-cloud-bigquery-storage>=2.24   # faster load_table_from_dataframe
+db-dtypes>=1.2                         # BigQuery <-> pandas dtype bridge

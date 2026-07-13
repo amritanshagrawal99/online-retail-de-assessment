@@ -1,0 +1,8 @@
+# Normalise line endings across platforms: store text as LF in the repo.
+* text=auto eol=lf
+
+# Treat binary assets as binary (never apply line-ending conversion).
+*.png binary
+*.parquet binary
+*.duckdb binary
+*.xlsx binary

@@ -1,0 +1,24 @@
+name: 'online_retail'
+version: '1.0.0'
+config-version: 2
+
+# dbt version of the SQL models in sql/02_load_transform.sql.
+# Target warehouse: BigQuery (profile 'online_retail' in profiles.yml).
+
+profile: 'online_retail'
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  online_retail:
+    staging:
+      +materialized: view          # cheap, always-fresh cleaning layer
+      +schema: staging
+    marts:
+      +materialized: table         # queried repeatedly by analysts/BI
+      +schema: marts

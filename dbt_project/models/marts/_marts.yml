@@ -1,0 +1,56 @@
+version: 2
+
+models:
+  - name: dim_customer
+    description: One row per known customer (guests excluded). Value = product lines, returns netted.
+    columns:
+      - name: customer_sk
+        description: Surrogate key — TO_HEX(MD5(customer_id)).
+        data_tests: [not_null, unique]
+      - name: customer_id
+        description: Natural key.
+        data_tests: [not_null, unique]
+      - name: lifetime_net_revenue
+        description: Net product revenue across the customer's lifetime.
+
+  - name: dim_product
+    description: One row per distinct stock_code (products + flagged service codes).
+    columns:
+      - name: product_sk
+        description: Surrogate key — TO_HEX(MD5(stock_code)).
+        data_tests: [not_null, unique]
+      - name: stock_code
+        data_tests: [not_null, unique]
+      - name: is_service_line
+        data_tests: [not_null]
+
+  - name: fct_sales
+    description: Line-grain sales fact. Grain = one de-duplicated invoice line.
+    columns:
+      - name: line_sk
+        description: Degenerate key to the staging line.
+        data_tests: [not_null, unique]
+      - name: product_sk
+        description: FK to dim_product.
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('dim_product')
+              field: product_sk
+      - name: customer_sk
+        description: FK to dim_customer (NULL for guest orders).
+        data_tests:
+          - relationships:
+              to: ref('dim_customer')
+              field: customer_sk
+              config:
+                where: "customer_sk is not null"
+
+  - name: fct_orders
+    description: Invoice-grain fact. Grain = one invoice.
+    columns:
+      - name: invoice_no
+        description: Primary key — one row per invoice.
+        data_tests: [not_null, unique]
+      - name: order_revenue
+        description: Net revenue for the invoice.

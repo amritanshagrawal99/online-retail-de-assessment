@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: stg_online_retail
+    description: >
+      Cleaned, typed, flagged line grain. One row per de-duplicated source line.
+      Flags let downstream models pick the right subset (valid sales, service
+      lines, cancellations) without re-deriving logic.
+    columns:
+      - name: line_sk
+        description: Primary key — MD5 hash of the natural line.
+        data_tests: [not_null, unique]
+      - name: invoice_no
+        description: Invoice number (STRING; leading 'C' = cancellation).
+        data_tests: [not_null]
+      - name: stock_code
+        data_tests: [not_null]
+      - name: unit_price
+        description: Unit price as NUMERIC (money, no float drift).
+      - name: is_service_line
+        description: TRUE for non-product codes (POST/DOT/M/fees/etc.).
+        data_tests: [not_null]
+      - name: has_customer
+        description: TRUE when the line is attributable to a customer_id.
+        data_tests: [not_null]
+      - name: is_valid_sale
+        description: Positive, attributable purchase of a real product.
+        data_tests: [not_null]

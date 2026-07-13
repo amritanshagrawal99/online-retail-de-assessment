@@ -1,0 +1,21 @@
+version: 2
+
+sources:
+  - name: online_retail
+    description: Raw landing zone, populated by extract/load.py (WRITE_TRUNCATE).
+    database: "{{ target.project if target.type == 'bigquery' else target.database }}"
+    schema: online_retail
+    tables:
+      - name: raw_online_retail
+        description: 1:1 faithful copy of the Online Retail II workbook.
+        loaded_at_field: _loaded_at
+        freshness:                      # alert if the source stops updating
+          warn_after: {count: 36, period: hour}
+          error_after: {count: 72, period: hour}
+        columns:
+          - name: _record_hash
+            description: MD5 of the natural line; dedup key.
+          - name: invoice
+            description: Invoice no.; leading 'C' marks a cancellation.
+          - name: customer_id
+            description: Customer id as string; NULL for guest orders.

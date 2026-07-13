@@ -1,0 +1,26 @@
+# Copy to ~/.dbt/profiles.yml (or set DBT_PROFILES_DIR) and fill in your project.
+# Two targets shown: BigQuery (the real target) and DuckDB (fast local dev).
+
+online_retail:
+  target: bq
+  outputs:
+
+    # --- BigQuery (production target) ---------------------------------
+    bq:
+      type: bigquery
+      method: service-account          # or oauth for local dev
+      project: YOUR_GCP_PROJECT
+      dataset: online_retail            # dbt appends +schema (staging/marts)
+      location: EU
+      keyfile: /path/to/service-account.json
+      threads: 4
+      priority: interactive
+
+    # --- DuckDB (local dev; mirrors the build_local.py engine) ---------
+    # Requires `dbt-duckdb`. Note: the models use BigQuery functions
+    # (SAFE_CAST, TO_HEX(MD5())); on DuckDB apply the same shim as
+    # local/build_local.py or run the .sql pipeline directly.
+    duck:
+      type: duckdb
+      path: ../local/warehouse.duckdb
+      threads: 4

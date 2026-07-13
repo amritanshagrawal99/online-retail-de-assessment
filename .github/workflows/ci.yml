@@ -1,0 +1,80 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  # ------------------------------------------------------------------ #
+  # verify: builds the whole pipeline in DuckDB and runs the model
+  # assertions (dedup, grain, referential integrity). No cloud creds
+  # needed, so it runs on every push/PR and fails if a model breaks.
+  # ------------------------------------------------------------------ #
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install deps
+        run: |
+          pip install -r extract/requirements.txt
+          pip install duckdb
+
+      - name: Cache source workbook
+        uses: actions/cache@v4
+        with:
+          path: data/online_retail_II.xlsx
+          key: online-retail-ii-xlsx-v1
+
+      - name: Extract & load (produces RAW parquet)
+        run: python extract/load.py
+
+      - name: Build models + run assertions (DuckDB)
+        run: python local/build_local.py       # exits non-zero if any assertion fails
+
+      - name: RFM analysis (sanity)
+        run: python local/rfm_analysis.py
+
+  # ------------------------------------------------------------------ #
+  # dbt: compiles + tests the dbt project against BigQuery. Runs only
+  # when a GCP service-account secret is configured (skipped on forks).
+  # ------------------------------------------------------------------ #
+  dbt:
+    runs-on: ubuntu-latest
+    needs: verify
+    if: ${{ github.ref == 'refs/heads/main' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dbt-bigquery
+        run: pip install dbt-bigquery~=1.8
+
+      - name: Write service-account keyfile
+        env:
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+        run: |
+          if [ -z "$GCP_SA_KEY" ]; then
+            echo "No GCP_SA_KEY secret set — skipping dbt build."; exit 0
+          fi
+          echo "$GCP_SA_KEY" > "$HOME/sa.json"
+
+      - name: dbt deps + build
+        if: ${{ env.GCP_SA_KEY != '' }}
+        env:
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+          DBT_PROJECT: ${{ secrets.GCP_PROJECT }}
+        working-directory: dbt_project
+        run: |
+          export DBT_PROFILES_DIR="$PWD/ci"
+          dbt deps || true
+          dbt build --target bq          # runs models + all schema.yml tests

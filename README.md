@@ -103,6 +103,9 @@ pip install -r app/requirements.txt
 streamlit run app/app.py
 ```
 
+> On Windows, `./demo.ps1` runs the extract → build → analysis → dashboard
+> sequence in one command (skips the download if the workbook is already local).
+
 `build_local.py` runs the **actual BigQuery SQL** through a tiny documented shim
 (`SAFE_CAST→TRY_CAST`, `FLOAT64→DOUBLE`, `SAFE_DIVIDE`/`FORMAT_DATE` macros,
 backtick stripping) and **fails loudly** if any model assertion breaks (dedup,

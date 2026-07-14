@@ -42,28 +42,28 @@ tests that stop bad data reaching a report.
 **Net product revenue over the two years: £18.9m.** Three findings stand out:
 
 1. **The business runs on a small core.** The **top 20% of customers drive 77%**
-   of revenue. One group — our "Champions" — is **~23% of buyers but 70% of
+   of revenue. One group — our "Champions" — is **~24% of buyers but 70% of
    revenue**.
 2. **Customers come back.** **76% of buyers reorder.** This is a repeat-purchase
    business, so the growth lever is keeping people buying, not just finding new
    ones.
-3. **A valuable group is quietly leaving.** **867 customers** who used to order
+3. **A valuable group is quietly leaving.** **839 customers** who used to order
    6+ times and spend ~£1,700 each **haven't bought in about a year** — roughly
-   **£1.47m** of historical revenue drifting out the door.
+   **£1.45m** of historical revenue drifting out the door.
 
 ---
 
 ## 4. The recommendation
 
-**Win back those 867 lapsed high-value customers.**
+**Win back those 839 lapsed high-value customers.**
 
-- **Who:** the 867 proven repeat buyers who've gone quiet (~12 months silent).
+- **Who:** the 839 proven repeat buyers who've gone quiet (~12 months silent).
 - **What:** a personalised win-back email referencing what they used to buy, with
   a short-dated incentive (e.g. *15% off your next order over £150*).
 - **Why it's low-risk:** email costs almost nothing, and the discount is only paid
   when someone actually comes back.
-- **Likely payoff:** a conservative **10% reactivation** is ~87 customers and
-  **£19k–£29k in the first two months**, with much more if they resume their old
+- **Likely payoff:** a conservative **10% reactivation** is ~84 customers and
+  **£19k–£28k in the first two months**, with much more if they resume their old
   buying rhythm.
 
 ---

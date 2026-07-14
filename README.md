@@ -13,9 +13,9 @@ analysis is reproducible on any laptop in about a minute.
 
 Over ~2 years this UK wholesaler did **£18.9m** net product revenue. It's a
 **repeat-purchase business** (76% of buyers reorder) where the **top 20% of
-customers drive 77% of revenue**. The actionable finding: **867 previously
-high-value customers (worth £1.47m) have gone quiet for ~12 months.**
-→ **Recommendation:** a win-back campaign to those 867, measured against a
+customers drive 77% of revenue**. The actionable finding: **839 previously
+high-value customers (worth £1.45m) have gone quiet for ~12 months.**
+→ **Recommendation:** a win-back campaign to those 839, measured against a
 randomised holdout. See [`analysis_answers.md`](analysis_answers.md) and
 [`write_up.md`](write_up.md).
 
@@ -161,6 +161,6 @@ All figures in the analysis come from `local/rfm_analysis.py` →
 | Known customers | 5,942 |
 | Repeat-purchase rate | 75.6% |
 | Top-20% customer revenue share | 76.7% |
-| Win-back target (At Risk + Cannot Lose Them) | 867 customers, £1.47m historical |
+| Win-back target (At Risk + Cannot Lose Them) | 839 customers, £1.45m historical |
 
 Run the three `python` commands in Option A and you'll get these exact numbers.

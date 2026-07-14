@@ -15,8 +15,8 @@ is attributable to a known customer and **£2.6m (14%)** is guest/unattributed.
 
 ### Insight 1 — Revenue is extremely concentrated: a small core carries the business
 - **Finding:** The top 20% of purchasing customers generate **76.7%** of net
-  revenue. One RFM segment — **Champions** (1,369 customers, ~23% of buyers) —
-  alone accounts for **69.5%** of revenue (£11.4m).
+  revenue. One RFM segment — **Champions** (1,435 customers, ~24% of buyers) —
+  alone accounts for **70.0%** of revenue (£11.5m).
 - **Method:** RFM scoring (Recency, Frequency, Monetary into quintiles) on
   `dim_customer`, plus a Pareto/quintile revenue-share calculation.
 - **Why care:** The commercial risk here is **retention, not acquisition**. If a
@@ -33,10 +33,10 @@ is attributable to a known customer and **£2.6m (14%)** is guest/unattributed.
   worth far more than the same % lift in new-customer count.
 
 ### Insight 3 — There is a large, recoverable "at-risk" cohort
-- **Finding:** **867 customers** fall into **At Risk + Cannot Lose Them** — people
-  who historically ordered **6+ times** and averaged **£1,691** net spend, but
-  whose **last purchase was ~12 months ago** (avg recency 362 days). Collectively
-  they represent **£1.47m** of historical revenue that is quietly lapsing.
+- **Finding:** **839 customers** fall into **At Risk + Cannot Lose Them** — people
+  who historically ordered **6+ times** and averaged **£1,728** net spend, but
+  whose **last purchase was ~12 months ago** (avg recency 361 days). Collectively
+  they represent **£1.45m** of historical revenue that is quietly lapsing.
 - **Method:** RFM recency segmentation — high Frequency/Monetary, low Recency.
 - **Why care:** This is the single most **actionable** finding: a specific,
   sizeable, previously-proven set of buyers, addressable by name, drifting away.
@@ -45,12 +45,12 @@ is attributable to a known customer and **£2.6m (14%)** is guest/unattributed.
 
 ## 2. The recommendation — a targeted win-back campaign
 
-**Run a win-back campaign against the 867 lapsed high-value customers
+**Run a win-back campaign against the 839 lapsed high-value customers
 (At Risk + Cannot Lose Them).**
 
-- **Target segment (who, and how identified):** The 867 customers scored
+- **Target segment (who, and how identified):** The 839 customers scored
   RFM-low on Recency but high on Frequency & Monetary — i.e. proven repeat buyers
-  (avg 6.1 lifetime orders, avg £1,691 net spend) who have not ordered in ~12
+  (avg 6.2 lifetime orders, avg £1,728 net spend) who have not ordered in ~12
   months. Pulled directly from `online_retail.rfm` where
   `segment IN ('At Risk','Cannot Lose Them')`.
 - **Mechanic / offer:** A personalised win-back email (and where a phone/account
@@ -59,15 +59,15 @@ is attributable to a known customer and **£2.6m (14%)** is guest/unattributed.
   weeks* (or free postage, which this business already itemises). Incentive is
   paid only on redemption, so cost scales with success.
 - **Expected commercial impact (with assumptions stated):** Win-back campaigns to
-  *known, previously-active* buyers typically reactivate **8–12%**. On 867
-  targets that is **~70–104 reactivations**. Segment average order value is
-  **~£277** (£1,691 ÷ 6.1 orders). A conservative "one order back" gives
-  **£19k–£29k** of incremental revenue in the first ~8 weeks. If even a third of
+  *known, previously-active* buyers typically reactivate **8–12%**. On 839
+  targets that is **~67–101 reactivations**. Segment average order value is
+  **~£280** (£1,728 ÷ 6.2 orders). A conservative "one order back" gives
+  **£19k–£28k** of incremental revenue in the first ~8 weeks. If even a third of
   reactivations resume their historical cadence, the annualised value runs into
   **six figures** against a near-zero marginal email cost. *Assumptions: 8–12%
-  reactivation, £277 AOV held, 15% discount on redeemed orders only.*
+  reactivation, £280 AOV held, 15% discount on redeemed orders only.*
 - **Measurement (how we'd know within N weeks):** **Randomised holdout.** Hold
-  back 20% of the 867 as an untouched control; send to the other 80%. Over an
+  back 20% of the 839 as an untouched control; send to the other 80%. Over an
   **8-week** window compare, treatment vs control: (1) reactivation rate
   (% placing ≥1 order), (2) revenue per targeted customer, (3) margin after
   discount. **Success = treatment reactivation rate exceeds control by ≥3–5pp
@@ -142,10 +142,10 @@ is attributable to a known customer and **£2.6m (14%)** is guest/unattributed.
 > is a **repeat-purchase business** (76% of buyers reorder). That reframes the
 > priority as **retention over acquisition**.
 >
-> We found **867 previously high-value customers — worth £1.47m historically —
+> We found **839 previously high-value customers — worth £1.45m historically —
 > who have stopped ordering in the last year.** 
 >
-> **Recommended next step:** a targeted win-back campaign to those 867, measured
+> **Recommended next step:** a targeted win-back campaign to those 839, measured
 > against a randomised holdout so we can prove the incremental effect within 8
 > weeks. Near-zero cost, and even a conservative 10% reactivation returns tens of
 > thousands in the first two months. We can launch this week.

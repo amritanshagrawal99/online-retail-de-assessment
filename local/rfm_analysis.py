@@ -52,9 +52,11 @@ base AS (
 ),
 scored AS (
   SELECT *,
-    6 - NTILE(5) OVER (ORDER BY recency_days)              AS r,   -- recent -> 5
-    NTILE(5) OVER (ORDER BY frequency)                    AS f,
-    NTILE(5) OVER (ORDER BY monetary)                     AS m
+    -- customer_sk is a deterministic tiebreaker so quintile boundaries are
+    -- stable across runs (NTILE otherwise splits ties in engine order).
+    6 - NTILE(5) OVER (ORDER BY recency_days, customer_sk)  AS r,   -- recent -> 5
+    NTILE(5) OVER (ORDER BY frequency, customer_sk)         AS f,
+    NTILE(5) OVER (ORDER BY monetary, customer_sk)          AS m
   FROM base
 )
 SELECT *,

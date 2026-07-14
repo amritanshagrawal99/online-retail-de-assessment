@@ -21,11 +21,13 @@ OUT = ROOT / "docs" / "dashboard.png"
 
 RFM = """
 with base as (
-  select date_diff('day', last_purchase_date,
+  select customer_sk,
+         date_diff('day', last_purchase_date,
            (select max(last_purchase_date)+interval 1 day from online_retail.dim_customer)) recency_days,
          lifetime_orders frequency, lifetime_net_revenue monetary
   from online_retail.dim_customer where lifetime_orders>0 and lifetime_net_revenue>0),
-scored as (select *, 6-ntile(5) over(order by recency_days) r, ntile(5) over(order by frequency) f from base)
+scored as (select *, 6-ntile(5) over(order by recency_days, customer_sk) r,
+                     ntile(5) over(order by frequency, customer_sk) f from base)
 select case
   when r>=4 and f>=4 then 'Champions' when r>=3 and f>=3 then 'Loyal'
   when r>=4 and f<=2 then 'New/Promising' when r=3 and f<=2 then 'Potential Loyalist'

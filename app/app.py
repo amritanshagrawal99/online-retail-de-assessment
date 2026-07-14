@@ -35,9 +35,9 @@ with base as (
 ),
 scored as (
   select *,
-    6 - ntile(5) over (order by recency_days) as r,
-    ntile(5) over (order by frequency)        as f,
-    ntile(5) over (order by monetary)         as m
+    6 - ntile(5) over (order by recency_days, customer_sk) as r,
+    ntile(5) over (order by frequency, customer_sk)        as f,
+    ntile(5) over (order by monetary, customer_sk)         as m
   from base
 )
 select *,
